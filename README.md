@@ -27,10 +27,10 @@ Then open http://localhost:8930. (Opening `index.html` directly in a browser als
 
 One-time setup:
 
-1. Create a repository named `qihangwu.github.io` under the `hahacharlie` GitHub account.
+1. Create a repository named `hahacharlie.github.io` under the `hahacharlie` GitHub account.
 2. Push this folder to that repository (`main` branch).
 3. In the repo: Settings → Pages → Source: “Deploy from a branch”, branch `main`, folder `/ (root)`.
-4. The site appears at `https://hahacharlie.github.io/qihangwu.github.io/` within a minute or two.
+4. The site appears at `https://hahacharlie.github.io/` within a minute or two.
 
 After that, publishing an update is just: commit → push.
 
