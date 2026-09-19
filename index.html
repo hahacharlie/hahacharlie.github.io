@@ -3,50 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wan Lab | Columbia University</title>
-  <meta name="description" content="The Wan Lab at Columbia University builds computing systems for emerging AI, and develops agentic AI that designs computing systems, across computer architecture, systems, and VLSI design. Led by Prof. Zishen Wan.">
-  <meta property="og:title" content="Wan Lab | Columbia University">
-  <meta property="og:description" content="Computing for AI, and AI for Computing: cross-layer co-design across architecture, systems, and silicon.">
+  <title>Qihang (Charlie) Wu</title>
+  <meta name="description" content="Qihang (Charlie) Wu is an M.S. student in Electrical Engineering at Arizona State University working on LLM agents for chip design, computer architecture, and heterogeneous integration.">
+  <meta property="og:title" content="Qihang (Charlie) Wu">
+  <meta property="og:description" content="LLM agents for chip design, computer architecture, and heterogeneous integration.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://wan-research-group.github.io/assets/columbia_campus.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=20260901">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EWSWCE7MTD"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-EWSWCE7MTD');
-  </script>
+  <link rel="stylesheet" href="css/site.css?v=20260919">
 </head>
 <body data-page="home">
 
   <main>
     <section class="hero">
       <div class="wrap">
-        <h1>Computing for <em>AI</em>, and AI for <em>Computing</em>.</h1>
+        <img class="hero-portrait" src="assets/qihang_wu.jpg" alt="Qihang (Charlie) Wu" onerror="this.remove()">
+        <h1>Qihang (<em>Charlie</em>) Wu</h1>
         <p class="lede">
-          We are the <strong>Wan Lab</strong> at Columbia University.
-          In one direction, we build cross-layer computing systems, spanning computer architecture,
-          software systems, and silicon, for emerging AI workloads including physical, embodied, neuro-symbolic,
-          and agentic AI. In the other, we develop agentic AI methods that design, optimize, and verify
-          computing systems themselves. The two directions close a loop: better computing enables
-          stronger AI, and stronger AI builds better computing.
+          Qihang (Charlie) Wu is an M.S. student in Electrical Engineering at Arizona State University (since January 2026),
+          and holds an M.S. in Electrical Engineering from NYU Tandon School of Engineering and a dual B.S. in Computer
+          Science and Mechanical Engineering from the University of Portland. Charlie's research spans LLM agents for electronic design
+          automation, heterogeneous integration, computer architecture, and SRAM and circuit design, with prior industry
+          experience as a hardware system engineer at Artly AI.
         </p>
-        <p class="hero-meta">Led by Prof. Zishen Wan · Department of Computer Science · Columbia University</p>
+        <p class="hero-meta">M.S. Student · Electrical Engineering · Arizona State University</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="research.html">Explore our research</a>
-          <a class="btn btn-ghost" href="publications.html">Publications</a>
+          <a class="btn btn-primary" href="publications.html">Publications</a>
+          <a class="btn btn-ghost" href="assets/Curriculum_Vitae.pdf">Download CV</a>
         </div>
-        <img class="hero-banner" src="assets/columbia_campus.jpg" alt="Columbia University campus with Low Library and the Manhattan skyline at sunset">
         <div class="recruit-banner">
-          <strong>We are recruiting!</strong>
-          <span>PhD students (Fall 2027), postdocs, and visiting students in computer architecture, systems, VLSI design, physical & agentic AI, and AI for computing system design.</span>
-          <a class="recruit-link" href="join.html">See openings →</a>
+          <strong>Currently</strong>
+          <span>M.S. student at Arizona State University working on LLM agents for chip design. Open to research collaborations and PhD opportunities.</span>
+          <a class="recruit-link" href="mailto:qihangwu@asu.edu">Get in touch →</a>
         </div>
       </div>
     </section>
@@ -56,11 +46,24 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">Research</div>
-            <h2>What we work on</h2>
+            <h2>What I work on</h2>
           </div>
           <a class="more" href="research.html">All research areas →</a>
         </div>
         <div class="pillars" id="pillars"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Publications</div>
+            <h2>Selected publications</h2>
+          </div>
+          <a class="more" href="publications.html">All publications →</a>
+        </div>
+        <div id="home-selected-pubs"></div>
       </div>
     </section>
 
@@ -76,23 +79,12 @@
         <div id="home-news"></div>
       </div>
     </section>
-
-    <section class="section collab-section">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Collaboration</div>
-            <h2>Research support and collaborators</h2>
-          </div>
-        </div>
-        <div class="collab-viewport" id="collaborators" aria-label="Organizations we collaborate with or are supported by"></div>
-      </div>
-    </section>
   </main>
 
-  <script src="data/site.js?v=20260901"></script>
-  <script src="data/research.js?v=20260901"></script>
-  <script src="data/news.js?v=20260901"></script>
-  <script src="js/render.js?v=20260901"></script>
+  <script src="data/site.js?v=20260919"></script>
+  <script src="data/research.js?v=20260919"></script>
+  <script src="data/news.js?v=20260919"></script>
+  <script src="data/publications.js?v=20260919"></script>
+  <script src="js/render.js?v=20260919"></script>
 </body>
 </html>

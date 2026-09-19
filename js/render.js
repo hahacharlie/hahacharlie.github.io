@@ -1,5 +1,5 @@
 /* ============================================================
-   Wan Lab shared rendering script.
+   Qihang (Charlie) Wu — shared rendering script.
    Reads data from data/*.js and renders nav, footer, and the
    page-specific sections. Pages opt in via <body data-page="...">.
    ============================================================ */
@@ -26,20 +26,12 @@
     return `${MONTHS[parseInt(m, 10) - 1]} ${y}`;
   };
 
-  // Names to bold in author lists: PI, all current members, and past students.
-  const labNames = (() => {
-    const names = [];
-    if (window.PEOPLE) {
-      names.push(window.PEOPLE.pi.name);
-      (window.PEOPLE.groups || []).forEach((g) => (g.members || []).forEach((m) => names.push(m.name)));
-      (window.PEOPLE.pastMentees || []).forEach((m) => names.push(m.name));
-    }
-    return names;
-  })();
+  // Names to bold in author lists.
+  const selfNames = ["Qihang Wu"];
 
   const boldAuthors = (authors) => {
     let html = esc(authors);
-    labNames.forEach((n) => {
+    selfNames.forEach((n) => {
       html = html.split(esc(n)).join(`<b>${esc(n)}</b>`);
     });
     return html;
@@ -51,18 +43,17 @@
     const page = document.body.dataset.page || "";
     const items = [
       ["index.html", "home", "Home"],
-      ["people.html", "people", "People"],
       ["research.html", "research", "Research"],
       ["publications.html", "publications", "Publications"],
       ["news.html", "news", "News"],
-      ["join.html", "join", "Join Us"],
+      ["cv.html", "cv", "CV"],
     ];
     const nav = document.createElement("header");
     nav.className = "nav";
     nav.innerHTML = `
       <div class="nav-inner">
         <a class="brand" href="index.html">
-          <span><span class="brand-mark">${esc(S.shortName)}</span> Lab</span>
+          <span><span class="brand-mark">${esc(S.firstName)}</span> Wu</span>
           <span class="brand-sub">${esc(S.institution)}</span>
         </a>
         <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
@@ -93,7 +84,7 @@
       <div class="footer-inner">
         <div>
           <h4>${esc(S.name)}</h4>
-          <p>${esc(S.expansion)}<br>${esc(S.department)}<br>${esc(S.institution)}<br>${esc(S.address)}</p>
+          <p>${esc(S.title)}<br>${esc(S.institution)}<br>${esc(S.location)}</p>
         </div>
         <div>
           <h4>Contact</h4>
@@ -102,9 +93,9 @@
             <a href="${esc(S.links.scholar)}">Google Scholar</a>
             <a href="${esc(S.links.github)}">GitHub</a>
             <a href="${esc(S.links.linkedin)}">LinkedIn</a>
-            <a href="join.html">Join Us</a>
+            <a href="${esc(S.links.cv)}">CV</a>
           </div>
-          <p class="footer-note">© ${new Date().getFullYear()} ${esc(S.name)}, ${esc(S.institution)}</p>
+          <p class="footer-note">© ${new Date().getFullYear()} ${esc(S.name)}</p>
         </div>
       </div>`;
     document.body.appendChild(f);
@@ -128,7 +119,7 @@
 
   // Full news archive: tag filters + year grouping.
   function renderNewsPage(listEl, controlsEl) {
-    const TAGS = ["All", "Lab", "Award", "Paper", "Talk", "Workshop", "Teaching", "Service", "Book"];
+    const TAGS = ["All", "Paper", "Talk", "Award", "Milestone", "Patent"];
     let tag = "All";
 
     function draw() {
@@ -191,15 +182,14 @@
   }
 
   // Research areas: filter label, chip label, and accent color.
-  // Keys match `tags` in data/publications.js; research blocks map
-  // via RESEARCH_AREA_TAG (the Chips & VLSI block id is "chips").
+  // Keys match both `tags` in data/publications.js and `id` in
+  // data/research.js.
   const AREAS = {
-    architecture: { label: "Computer Architecture", chip: "Architecture", color: "#0b5cc4" },
-    systems: { label: "Systems", chip: "Systems", color: "#0b7570" },
-    silicon: { label: "Silicon & Circuits", chip: "Silicon", color: "#a0520f" },
-    arch2: { label: "Agentic AI for Design", chip: "Agentic AI for Design", color: "#6c4cb3" },
+    eda: { label: "Agentic AI for EDA", chip: "Agentic AI for EDA", color: "#8c1d40" },
+    hi: { label: "Heterogeneous Integration", chip: "Heterogeneous Integration", color: "#ff7f32" },
+    architecture: { label: "Computer Architecture", chip: "Architecture", color: "#00a3e0" },
+    circuits: { label: "Circuits & Memory", chip: "Circuits & Memory", color: "#5c9a1b" },
   };
-  const RESEARCH_AREA_TAG = { architecture: "architecture", systems: "systems", chips: "silicon", arch2: "arch2" };
 
   const areaChipsHTML = (p) => {
     const tags = (p.tags || []).filter((t) => AREAS[t]);
@@ -312,43 +302,21 @@
     draw();
   }
 
-  function renderBooks(el) {
-    el.innerHTML = window.BOOKS.map(
-      (b) => `
-      <div class="book-card">
-        <h3>${esc(b.title)}</h3>
-        <div class="book-meta">${boldAuthors(b.authors)} · ${esc(b.venue)}, ${b.year}</div>
-        <p>${esc(b.blurb)}</p>
-        <div class="pub-links">${Object.entries(b.links)
-          .map(([k, v]) => `<a href="${esc(v)}">${esc(k)}</a>`)
-          .join("")}</div>
-      </div>`
-    ).join("");
-  }
-
-  function renderCollaborators(el) {
-    // Home page marquee. Entries in SITE.collaborators are either a
-    // plain string (text wordmark) or { name, logo } (logo image).
-    // Items are duplicated once so the -50% keyframe loops seamlessly.
-    const orgs = (S.collaborators || []).map((c) => (typeof c === "string" ? { name: c } : c));
-    if (!orgs.length) return;
-    const item = (o, hidden) =>
-      `<span class="collab-item"${hidden ? ' aria-hidden="true"' : ""}>${
-        o.logo ? `<img src="${esc(o.logo)}" alt="${hidden ? "" : esc(o.name)}">` : esc(o.name)
-      }</span>`;
-    el.innerHTML = `<div class="collab-track">${orgs.map((o) => item(o, false)).join("")}${orgs
-      .map((o) => item(o, true))
-      .join("")}</div>`;
+  // Home page: every publication flagged `selected: true`.
+  function renderSelectedPubs(el) {
+    el.innerHTML = window.PUBLICATIONS.filter((p) => p.selected)
+      .map((p) => pubItemHTML(p, { tags: true }))
+      .join("");
   }
 
   // ---------- research ----------
 
   function renderPillars(el) {
     el.innerHTML = window.RESEARCH.map((r, i) => {
-      const tag = RESEARCH_AREA_TAG[r.id];
-      const style = tag ? ` style="--area-color:${AREAS[tag].color}"` : "";
+      const a = AREAS[r.id];
+      const style = a ? ` style="--area-color:${a.color}"` : "";
       return `
-      <a class="pillar"${style} href="research.html#${r.id}">
+      <a class="pillar"${style} href="research.html#${esc(r.id)}">
         <div class="pillar-num">0${i + 1}</div>
         <h3>${esc(r.title)}</h3>
         <p>${esc(r.short)}</p>
@@ -369,104 +337,106 @@
           return `<div class="rep-pub">${t}<span class="rep-venue">${esc(p.venue)} ${p.year}</span></div>`;
         })
         .join("");
-      const tag = RESEARCH_AREA_TAG[r.id];
-      const style = tag ? ` style="--area-color:${AREAS[tag].color}"` : "";
-      const moreLink = tag
-        ? `<a class="research-more" href="publications.html?area=${tag}">All ${esc(AREAS[tag].label)} publications →</a>`
+      const a = AREAS[r.id];
+      const style = a ? ` style="--area-color:${a.color}"` : "";
+      // Areas without publications (yet) get no rep list and no "All …" link.
+      const moreLink = a && reps
+        ? `<a class="research-more" href="publications.html?area=${esc(r.id)}">All ${esc(a.label)} publications →</a>`
         : "";
       return `
-      <div class="research-block" id="${r.id}"${style}>
+      <div class="research-block" id="${esc(r.id)}"${style}>
         <h2>${esc(r.title)}</h2>
         ${r.subtitle ? `<div class="research-sub">${esc(r.subtitle)}</div>` : ""}
         <p class="research-long">${esc(r.long)}</p>
         <div class="keywords">${r.keywords.map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div>
-        <div class="rep-pubs">${reps}</div>
+        ${reps ? `<div class="rep-pubs">${reps}</div>` : ""}
         ${moreLink}
       </div>`;
     }).join("");
   }
 
-  // ---------- people ----------
+  // ---------- cv ----------
 
-  function renderPeoplePage(piEl, groupsEl) {
-    const pi = window.PEOPLE.pi;
-    piEl.innerHTML = `
-      <div class="pi-card">
-        <div class="pi-photo"><img src="${esc(pi.photo)}" alt="${esc(pi.name)}"></div>
-        <div>
-          <div class="pi-name">${esc(pi.name)}</div>
-          <div class="pi-role">${esc(pi.role)}, ${esc(S.department)}, ${esc(S.institution)}</div>
-          <div class="pi-bio">${pi.bio.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
-          <div class="pi-links">${Object.entries(pi.links)
-            .map(([k, v]) => `<a href="${esc(v)}">${esc(k)}</a>`)
-            .join("")}</div>
-          <div class="pi-email"><a href="mailto:${esc(pi.email)}">${esc(pi.email)}</a></div>
-          ${pi.office ? `<div class="pi-office">${esc(pi.office)}</div>` : ""}
+  // One dated entry: title + right-aligned dates, optional sub/meta
+  // lines, optional blurb and bullets. title/sub/meta are HTML
+  // (callers escape); blurb and bullets are plain text.
+  function cvEntryHTML(e) {
+    const bullets = (e.bullets || []).map((b) => `<li>${esc(b)}</li>`).join("");
+    return `
+      <div class="cv-entry">
+        <div class="cv-entry-head">
+          <div class="cv-entry-title">${e.title}</div>
+          <div class="cv-entry-dates">${esc(e.dates || "")}</div>
         </div>
+        ${e.sub ? `<div class="cv-entry-sub">${e.sub}</div>` : ""}
+        ${e.meta ? `<div class="cv-entry-meta">${e.meta}</div>` : ""}
+        ${e.blurb ? `<p class="cv-entry-blurb">${esc(e.blurb)}</p>` : ""}
+        ${bullets ? `<ul class="cv-bullets">${bullets}</ul>` : ""}
       </div>`;
+  }
 
-    const menteesHTML = (() => {
-      const rows = window.PEOPLE.pastMentees || [];
-      if (!rows.length) return "";
-      return `
-        <div class="people-group">
-          <h2>Past Students</h2>
-          ${window.PEOPLE.pastMenteesNote ? `<p class="group-note">${esc(window.PEOPLE.pastMenteesNote)}</p>` : ""}
-          <div class="table-scroll">
-            <table class="mentee-table">
-              <thead>
-                <tr><th>Name</th><th>Years</th><th>Background</th><th>Selected work</th><th>Next</th></tr>
-              </thead>
-              <tbody>
-                ${rows
-                  .map((m) => {
-                    const name = m.link ? `<a href="${esc(m.link)}">${esc(m.name)}</a>` : esc(m.name);
-                    return `<tr>
-                      <td class="mentee-name">${name}</td>
-                      <td class="mentee-years">${esc(m.years || "")}</td>
-                      <td>${esc(m.background || "")}</td>
-                      <td class="mentee-highlight">${esc(m.highlight || "")}</td>
-                      <td>${m.next ? "→ " + esc(m.next) : ""}</td>
-                    </tr>`;
-                  })
-                  .join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>`;
-    })();
+  // Compact table for presentations / honors. Cells are HTML.
+  function cvTableHTML(cols, rows) {
+    return `
+      <div class="table-scroll">
+        <table class="mentee-table cv-table">
+          <thead><tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr></thead>
+          <tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>
+        </table>
+      </div>`;
+  }
 
-    groupsEl.innerHTML = (window.PEOPLE.groups || [])
-      .filter((g) => (g.members || []).length > 0)
-      .map(
-        (g) => `
-        <div class="people-group">
-          <h2>${esc(g.title)}</h2>
-          <div class="people-grid">
-            ${g.members
-              .map((m) => {
-                const avatar = m.photo
-                  ? `<img class="avatar" src="${esc(m.photo)}" alt="${esc(m.name)}">`
-                  : `<div class="monogram">${esc(m.name.trim()[0] || "?")}</div>`;
-                const links = Object.entries(m.links || {})
-                  .map(([k, v]) => `<a href="${esc(v)}">${esc(k)}</a>`)
-                  .join("");
-                return `
-                <div class="person">
-                  ${avatar}
-                  <h3>${esc(m.name)}</h3>
-                  <div class="person-role">${esc(m.role || "")}${m.destination ? " " + esc(m.destination) : ""}</div>
-                  ${m.note ? `<div class="person-note">${esc(m.note)}</div>` : ""}
-                  ${m.edu ? `<div class="person-edu">${esc(m.edu)}</div>` : ""}
-                  ${m.interests ? `<div class="person-interests">${esc(m.interests)}</div>` : ""}
-                  ${links ? `<div class="person-links">${links}</div>` : ""}
-                </div>`;
-              })
-              .join("")}
-          </div>
-        </div>`
-      )
-      .join("") + menteesHTML;
+  // ids: { education, research, industry, projects, presentations, honors } → element ids.
+  function renderCvPage(ids) {
+    const C = window.CV;
+    const put = (key, html) => {
+      const el = document.getElementById(ids[key]);
+      if (el) el.innerHTML = html;
+    };
+    const dateCell = (d) => `<span class="mentee-years">${esc(d || "")}</span>`;
+
+    put("education", (C.education || []).map((e) => cvEntryHTML({
+      title: esc(e.school),
+      dates: e.dates,
+      sub: esc(e.degree),
+      meta: [e.unit, e.location].filter(Boolean).map(esc).join(" · "),
+      blurb: e.note,
+    })).join(""));
+
+    put("research", (C.research || []).map((r) => cvEntryHTML({
+      title: esc(r.title),
+      dates: r.dates,
+      sub: esc(r.role),
+      meta: [r.advisor ? "Advised by " + r.advisor : "", r.org].filter(Boolean).map(esc).join(" · "),
+      bullets: r.bullets,
+    })).join(""));
+
+    put("industry", (C.industry || []).map((j) => cvEntryHTML({
+      title: j.url ? `<a href="${esc(j.url)}">${esc(j.company)}</a>` : esc(j.company),
+      dates: j.dates,
+      sub: esc(j.role),
+      meta: esc(j.location || ""),
+      blurb: j.blurb,
+      bullets: j.bullets,
+    })).join(""));
+
+    put("projects", (C.projects || []).map((p) => cvEntryHTML({
+      title: esc(p.title),
+      dates: p.dates,
+      bullets: p.bullets,
+    })).join(""));
+
+    put("presentations", cvTableHTML(
+      ["Title", "Venue", "Place", "Date"],
+      (C.presentations || []).map((p) => [
+        `<span class="mentee-name">${esc(p.title)}</span>`, esc(p.venue), esc(p.place), dateCell(p.date),
+      ])
+    ));
+
+    put("honors", cvTableHTML(
+      ["Type", "Title", "Date"],
+      (C.honors || []).map((h) => [esc(h.kind), `<span class="mentee-name">${esc(h.title)}</span>`, dateCell(h.date)])
+    ));
   }
 
   // ---------- page dispatch ----------
@@ -479,8 +449,8 @@
 
     if (page === "home") {
       renderPillars(document.getElementById("pillars"));
+      renderSelectedPubs(document.getElementById("home-selected-pubs"));
       renderNews(document.getElementById("home-news"), 6);
-      renderCollaborators(document.getElementById("collaborators"));
     }
     if (page === "news") {
       renderNewsPage(
@@ -493,17 +463,20 @@
         document.getElementById("pub-list"),
         document.getElementById("pub-controls")
       );
-      renderBooks(document.getElementById("books"));
     }
     if (page === "research") {
       renderPillars(document.getElementById("research-pillars"));
       renderResearchPage(document.getElementById("research-blocks"));
     }
-    if (page === "people") {
-      renderPeoplePage(
-        document.getElementById("pi"),
-        document.getElementById("people-groups")
-      );
+    if (page === "cv") {
+      renderCvPage({
+        education: "cv-education",
+        research: "cv-research",
+        industry: "cv-industry",
+        projects: "cv-projects",
+        presentations: "cv-presentations",
+        honors: "cv-honors",
+      });
     }
   });
 })();

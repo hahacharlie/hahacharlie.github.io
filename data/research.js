@@ -1,54 +1,53 @@
 // ============================================================
 // Research areas shown on the home page and the Research page.
-// Mirrors the PI homepage taxonomy: two directions (Computing
-// for AI / AI for Computing) across three layers, plus the
-// Architecture 2.0 area.
+// `id` doubles as the publication tag vocabulary in
+// data/publications.js and the AREAS map in js/render.js.
 // `pubs` lists publication ids from data/publications.js used as
-// representative works on the Research page.
+// representative works on the Research page (may be empty).
 // ============================================================
 window.RESEARCH = [
   {
+    id: "eda",
+    title: "Agentic AI for EDA",
+    subtitle: "LLM Agents for Chip Design",
+    short:
+      "LLM and multi-agent workflows for physical design parameter optimization and FPGA place-and-route algorithm evolution.",
+    long:
+      "This line of work builds LLM-based agents for chip design: a certification-guided agentic workflow for physical design parameter optimization (CAPO, GLSVLSI 2026), multi-agent-driven algorithm evolution for FPGA place and route (VPR-Evolve), and an LLM agent for the cross-layer optimization of 2.5D and 3D chiplet-based systems (CHICO-Agent, ICLAD 2026).",
+    keywords: ["LLM agents", "Physical design", "Parameter optimization", "FPGA place & route", "Algorithm evolution"],
+    pubs: ["chico-agent", "capo", "vpr-evolve"],
+  },
+  {
+    id: "hi",
+    title: "Heterogeneous Integration",
+    subtitle: "2.5D and 3D Chiplet-based Systems",
+    short:
+      "Cross-layer optimization of 2.5D and 3D chiplet-based systems, driven by LLM agents.",
+    long:
+      "CHICO-Agent is an LLM agent for the cross-layer optimization of 2.5D and 3D chiplet-based systems (ICLAD 2026).",
+    keywords: ["Chiplets", "2.5D/3D integration", "Cross-layer optimization"],
+    pubs: ["chico-agent"],
+  },
+  {
     id: "architecture",
     title: "Computer Architecture",
-    subtitle: "Architectures for Emerging Intelligence",
+    subtitle: "Hardware Data Structures and Microarchitecture",
     short:
-      "Domain-specific and adaptive architectures for embodied, neuro-symbolic, and reasoning workloads: accelerators, memory systems, and heterogeneous platforms.",
+      "Hardware priority queue architectures, RISC-V microarchitecture, and FPGA accelerators.",
     long:
-      "Emerging intelligence does not run well on yesterday's hardware. We design domain-specific and adaptive architectures for physical, embodied, neuro-symbolic, and reasoning workloads, spanning accelerators, memory systems, and heterogeneous platforms, so that perception, planning, and “System-2” reasoning are no longer the bottlenecks of intelligent machines. In the reverse direction, we also use AI agents for architecture design space exploration, generation, and evaluation.",
-    keywords: ["Accelerators", "Software-hardware co-design", "Heterogeneous architecture", "Memory", "Dataflow"],
-    pubs: ["reason", "compositional-ai", "cogsys", "nsflow", "arborist", "rtgs", "autopilot"],
+      "Hardware data structures are the building blocks of scalable accelerators. Revisiting Hardware Priority Queue Architectures implements and benchmarks register-tree, BRAM-tree, systolic-array, and hybrid-tree priority queues on Xilinx FPGAs with a unified parameterized RTL and testbench, mapping the area-latency trade-offs across designs. Related work includes a multi-cycle RISC-V RV32I processor deployed on an Artix-7 FPGA.",
+    keywords: ["Priority queues", "FPGA", "SystemVerilog", "RISC-V", "Accelerators"],
+    pubs: ["priority-queue"],
   },
   {
-    id: "systems",
-    title: "Systems",
-    subtitle: "AI Systems & Cross-Layer Co-Design",
+    id: "circuits",
+    title: "Circuits & Memory Design",
+    subtitle: "SRAM, BIST, and Side-Channel Resistance",
     short:
-      "System support for emerging intelligence: workload characterization, runtime and serving systems, hardware-software co-design, and resilience.",
+      "SRAM design in the ASAP7 7nm PDK, built-in self-test, and side-channel-resistant design.",
     long:
-      "From cooperative robot teams to multi-agent LLM workflows, emerging AI applications stress every layer of the system stack: long-horizon planning, tightly coupled perception-cognition-action loops, and strict real-time budgets. We build the workload characterizations, benchmarks, runtime and serving systems, and cross-layer co-designs that make these applications efficient, scalable, and reliable, from edge devices to serving clusters. We also develop agentic methods for system modeling, optimization, and operation.",
-    keywords: ["Agentic serving", "Workload characterization", "Reliability", "System co-design", "GPU/CPU/NPU/TPU"],
-    pubs: ["create", "reca", "dyserve", "faster-moa", "slm-mux", "embodiedperf", "mulberry"],
-  },
-  {
-    id: "chips",
-    title: "Chips & VLSI",
-    subtitle: "AI Chips & Memory-Centric Computing",
-    short:
-      "AI SoCs, FPGA prototypes, memory-centric architectures, and emerging-device circuits that translate system and architecture ideas into working silicon.",
-    long:
-      "Architecture ideas earn their keep in silicon. We build AI SoCs, FPGA prototypes, memory-centric architectures, and emerging-device circuits, from RRAM compute-in-memory and SOT-CAM to ferroelectric logic and 3D integration, that translate system and architecture ideas into working, measured chips. Silicon results then feed back into the system and architecture layers, closing the cross-layer co-design loop. We further explore agentic methods for hardware generation, optimization, and verification.",
-    keywords: ["SoCs", "VLSI design", "FPGA", "Non-volatile memory", "Memory-centric computing", "Emerging devices"],
-    pubs: ["jssc26", "jssc23", "ferro3d", "hydra", "h3dfact", "cicc22"],
-  },
-  {
-    id: "arch2",
-    title: "Agentic AI for Computing System Design",
-    subtitle: "Architecture 2.0",
-    short:
-      "AI agents as computer architects: benchmarks, reasoning-augmented design space exploration, and agile hardware generation from software to silicon.",
-    long:
-      "If AI is reshaping every field, computing system design should be no exception. We study how LLM-based agents can act as computer architects: benchmarks that measure their architectural reasoning, simulator-in-the-loop agents that explore design spaces with auditable traces, and multi-agent flows that draft ISA extensions and hardware. The long-term vision is a co-evolution loop where hardware, systems, and AI agents co-design, co-reason, and co-evolve.",
-    keywords: ["LLM agents", "Design space exploration", "Benchmarks", "Hardware generation", "Verification"],
-    pubs: ["archeval", "agentdse", "quarch", "lace", "hdlxgraph", "genai-systems"],
+      "Work at the circuit level includes a 4kB low-power SRAM array in the ASAP7 7nm PDK with decoder sizing optimized under process variation and verified with Monte Carlo and post-layout simulation; an AES-128 accelerator with a transistor-level power model used to simulate differential power analysis attacks and inform secure SRAM countermeasures; and a 256x4-bit SRAM with a built-in self-test engine synthesized in Cadence Genus.",
+    keywords: ["SRAM", "ASAP7", "BIST", "Side-channel attacks", "Cadence Virtuoso"],
+    pubs: [],
   },
 ];
