@@ -11,7 +11,7 @@ window.NEWS = [
   {
     date: "2026-07",
     tag: "Talk",
-    text: "Charlie presents [CHICO-Agent](https://arxiv.org/abs/2604.18764) at **ICLAD 2026** at Stanford University.",
+    text: "I present [CHICO-Agent](https://arxiv.org/abs/2604.18764) at **ICLAD 2026** at Stanford University.",
   },
   {
     date: "2026-07",
@@ -31,58 +31,58 @@ window.NEWS = [
   {
     date: "2026-01",
     tag: "Milestone",
-    text: "Charlie starts the M.S. in Electrical Engineering at **Arizona State University**, Ira A. Fulton Schools of Engineering.",
+    text: "I start my M.S. in Electrical Engineering at **Arizona State University**, Ira A. Fulton Schools of Engineering.",
   },
 
   // ---------------- 2025 ----------------
   {
     date: "2025-06",
     tag: "Talk",
-    text: "Charlie presents [Revisiting Hardware Priority Queue Architectures](https://arxiv.org/abs/2607.19881) at the **OSCAR 2025** Workshop at Waseda University, Tokyo.",
+    text: "I present [Revisiting Hardware Priority Queue Architectures](https://arxiv.org/abs/2607.19881) at the **OSCAR 2025** Workshop at Waseda University, Tokyo.",
   },
 
   // ---------------- 2024 ----------------
   {
     date: "2024-05",
     tag: "Milestone",
-    text: "Charlie receives the M.S. in Electrical Engineering from **NYU Tandon School of Engineering**.",
+    text: "I receive my M.S. in Electrical Engineering from **NYU Tandon School of Engineering**.",
   },
 
   // ---------------- 2022 ----------------
   {
     date: "2022-08",
     tag: "Milestone",
-    text: "Charlie starts the M.S. in Electrical Engineering at **New York University**, Tandon School of Engineering.",
+    text: "I start my M.S. in Electrical Engineering at **New York University**, Tandon School of Engineering.",
   },
 
   // ---------------- 2021 ----------------
   {
     date: "2021-05",
     tag: "Patent",
-    text: "Patent application “System and Method for Robotic Food and Beverage Preparation Using Computer Vision” (PCT/US21/33430) is filed.",
+    text: "Patent application “System and Method for Robotic Food and Beverage Preparation Using Computer Vision” (PCT/US21/33430), on which I am an inventor, is filed.",
   },
 
   // ---------------- 2020 ----------------
   {
     date: "2020-06",
     tag: "Milestone",
-    text: "Charlie is certified as an **Engineer in Training (E.I.T.)** by the Oregon State Board of Examiners for Engineering.",
+    text: "I am certified as an **Engineer in Training (E.I.T.)** by the Oregon State Board of Examiners for Engineering.",
   },
   {
     date: "2020-05",
     tag: "Milestone",
-    text: "Charlie graduates from the **University of Portland** with a dual B.S. in Computer Science and Mechanical Engineering.",
+    text: "I graduate from the **University of Portland** with a dual B.S. in Computer Science and Mechanical Engineering.",
   },
   {
     date: "2020-05",
     tag: "Award",
-    text: "Charlie receives the **Undergraduate Team Experience Award** (2019–2020) from the Oregon NASA Space Grant Consortium.",
+    text: "I receive the **Undergraduate Team Experience Award** (2019–2020) from the Oregon NASA Space Grant Consortium.",
   },
 
   // ---------------- 2019 ----------------
   {
     date: "2019-11",
     tag: "Talk",
-    text: "Charlie presents the NASA Lunabotics 2020 poster at the **2019 Oregon NASA Space Grant Consortium** at Oregon State University.",
+    text: "I present the NASA Lunabotics 2020 poster at the **2019 Oregon NASA Space Grant Consortium** at Oregon State University.",
   },
 ];
