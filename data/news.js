@@ -31,7 +31,7 @@ window.NEWS = [
   {
     date: "2026-01",
     tag: "Milestone",
-    text: "I start my M.S. in Electrical Engineering at **Arizona State University**, Ira A. Fulton Schools of Engineering.",
+    text: "I start my Ph.D. in Computer Engineering at **Arizona State University**, Ira A. Fulton Schools of Engineering.",
   },
 
   // ---------------- 2025 ----------------

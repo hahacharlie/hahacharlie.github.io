@@ -9,7 +9,7 @@ window.CV = {
     {
       school: "Arizona State University",
       unit: "Ira A. Fulton Schools of Engineering",
-      degree: "M.S. in Electrical Engineering",
+      degree: "Ph.D. in Computer Engineering",
       dates: "Jan 2026 – present",
       location: "Tempe, AZ",
     },
