@@ -9,6 +9,11 @@
 window.NEWS = [
   // ---------------- 2026 ----------------
   {
+    date: "2026-09",
+    tag: "Paper",
+    text: "[VPR-Evolve](https://arxiv.org/abs/2607.24998), multi-agent-driven algorithm evolution for FPGA place and route, is accepted to **ASP-DAC 2027**.",
+  },
+  {
     date: "2026-07",
     tag: "Talk",
     text: "I present [CHICO-Agent](https://arxiv.org/abs/2604.18764) at **ICLAD 2026** at Stanford University.",

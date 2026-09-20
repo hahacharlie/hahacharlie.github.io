@@ -13,7 +13,7 @@ window.RESEARCH = [
     short:
       "LLM and multi-agent workflows for physical design parameter optimization and FPGA place-and-route algorithm evolution.",
     long:
-      "I build LLM-based agents for chip design: a certification-guided agentic workflow for physical design parameter optimization (CAPO, GLSVLSI 2026), multi-agent-driven algorithm evolution for FPGA place and route (VPR-Evolve), and an LLM agent for the cross-layer optimization of 2.5D and 3D chiplet-based systems (CHICO-Agent, ICLAD 2026).",
+      "I build LLM-based agents for chip design: a certification-guided agentic workflow for physical design parameter optimization (CAPO, GLSVLSI 2026), multi-agent-driven algorithm evolution for FPGA place and route (VPR-Evolve, ASP-DAC 2027), and an LLM agent for the cross-layer optimization of 2.5D and 3D chiplet-based systems (CHICO-Agent, ICLAD 2026).",
     keywords: ["LLM agents", "Physical design", "Parameter optimization", "FPGA place & route", "Algorithm evolution"],
     pubs: ["chico-agent", "capo", "vpr-evolve"],
   },

@@ -8,15 +8,17 @@
 // - `links` keys become link labels: Paper, Code, Slides, ...
 // ============================================================
 window.PUBLICATIONS = [
-  // ---------------- 2026 ----------------
+  // ---------------- 2027 ----------------
   {
     id: "vpr-evolve",
     title: "VPR-Evolve: Multi-Agent-Driven Algorithm Evolution for FPGA Place and Route",
     authors: "Qihang Wu, Taizun Jafri, Aman Arora, Vidya A. Chhabria",
-    venue: "arXiv", venueFull: "arXiv preprint (arXiv:2607.24998 [cs.AR])",
-    year: 2026, type: "preprint", tags: ["eda"], selected: true,
+    venue: "ASP-DAC", venueFull: "Proceedings of the 32nd Asia and South Pacific Design Automation Conference (arXiv:2607.24998)",
+    year: 2027, type: "conference", tags: ["eda"], selected: true, note: "To appear",
     links: { Paper: "https://arxiv.org/abs/2607.24998" },
   },
+
+  // ---------------- 2026 ----------------
   {
     id: "capo",
     title: "CAPO: Certification-Guided Agentic Workflow for Physical Design Parameter Optimization",

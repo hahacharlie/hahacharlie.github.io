@@ -39,19 +39,6 @@ window.CV = {
   // ---- Research experience ----
   research: [
     {
-      title: "Revisiting Hardware Priority Queue Architectures",
-      role: "Research Assistant",
-      advisor: "Dr. Austin Rovinski",
-      org: "New York University",
-      dates: "May 2024 – May 2025",
-      bullets: [
-        "Designed and implemented multiple hardware priority queue architectures (Register Tree, BRAM Tree, Systolic Array, Hybrid Tree) on Xilinx FPGA using SystemVerilog, targeting scalable hardware accelerator applications.",
-        "Developed a parameterized RTL design with a unified testbench enabling architecture-agnostic benchmarking and verification.",
-        "Conducted timing analysis, resource utilization evaluation, and scalability testing in Xilinx Vivado.",
-        "Investigated area-latency trade-offs across architectures.",
-      ],
-    },
-    {
       title: "High-Efficiency SRAM Design for IoT Devices",
       role: "Student Research Assistant Intern",
       advisor: "Dr. Azeez Bhavnagarwala",
@@ -77,18 +64,6 @@ window.CV = {
         "Identified correlation between power fluctuations and AES internals, informing countermeasures for secure SRAM design.",
       ],
     },
-    {
-      title: "NASA Lunabotics Engineering Competition",
-      role: "Team Member",
-      advisor: "Dr. Ben Tribelhorn",
-      org: "University of Portland",
-      dates: "Sep 2019 – May 2020",
-      bullets: [
-        "Team of 5 developing key components of a Lunar Rover.",
-        "Implemented a path-finding algorithm enabling autonomous navigation.",
-        "Developed an overlaying algorithm integrated with a 2D Lidar on a rotating mount to generate 3D scans of terrain.",
-      ],
-    },
   ],
 
   // ---- Industrial experience ----
@@ -106,14 +81,6 @@ window.CV = {
         "Designed a motorized rotating/tilting platform achieving a 120% increase in latte-art success rate.",
         "Developed embedded firmware (C, Arduino, ESP8266, STM32) for robot-control interfacing.",
       ],
-    },
-    {
-      company: "Hyster-Yale",
-      url: "https://www.hyster-yale.com/",
-      role: "Mechanical Engineer Intern",
-      dates: "Jun 2018 – Mar 2020",
-      location: "Portland, OR",
-      bullets: [],
     },
   ],
 
