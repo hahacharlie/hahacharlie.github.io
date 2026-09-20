@@ -11,53 +11,53 @@ window.NEWS = [
   {
     date: "2026-09",
     tag: "Paper",
-    text: "[VPR-Evolve](https://arxiv.org/abs/2607.24998), multi-agent-driven algorithm evolution for FPGA place and route, is accepted to **ASP-DAC 2027**.",
+    text: "[VPR-Evolve](https://arxiv.org/abs/2607.24998), our work on multi-agent-driven algorithm evolution for FPGA place and route, was accepted to **ASP-DAC 2027**.",
   },
   {
     date: "2026-07",
     tag: "Talk",
-    text: "I present [CHICO-Agent](https://arxiv.org/abs/2604.18764) at **ICLAD 2026** at Stanford University.",
+    text: "I presented [CHICO-Agent](https://arxiv.org/abs/2604.18764) at **ICLAD 2026** at Stanford University.",
   },
   {
     date: "2026-07",
     tag: "Paper",
-    text: "[VPR-Evolve](https://arxiv.org/abs/2607.24998), multi-agent-driven algorithm evolution for FPGA place and route, is released on arXiv.",
+    text: "We released [VPR-Evolve](https://arxiv.org/abs/2607.24998), our work on multi-agent-driven algorithm evolution for FPGA place and route, on arXiv.",
   },
   {
     date: "2026-06",
     tag: "Paper",
-    text: "CAPO, a certification-guided agentic workflow for physical design parameter optimization, is published in the proceedings of **GLSVLSI 2026** (pp. 240–246).",
+    text: "CAPO, a certification-guided agentic workflow for physical-design parameter optimization, appeared in the proceedings of **GLSVLSI 2026** (pp. 240–246).",
   },
   {
     date: "2026-04",
     tag: "Paper",
-    text: "[CHICO-Agent](https://arxiv.org/abs/2604.18764), an LLM agent for the cross-layer optimization of 2.5D and 3D chiplet-based systems, is accepted to **ICLAD 2026** and released on arXiv.",
+    text: "[CHICO-Agent](https://arxiv.org/abs/2604.18764), an LLM agent for cross-layer optimization of 2.5D and 3D chiplet systems, was accepted to **ICLAD 2026** and released on arXiv.",
   },
   {
     date: "2026-01",
     tag: "Milestone",
-    text: "I start my Ph.D. in Computer Engineering at **Arizona State University**, Ira A. Fulton Schools of Engineering.",
+    text: "I began my Ph.D. in Computer Engineering at **Arizona State University** in the Ira A. Fulton Schools of Engineering.",
   },
 
   // ---------------- 2025 ----------------
   {
     date: "2025-06",
     tag: "Talk",
-    text: "I present [Revisiting Hardware Priority Queue Architectures](https://arxiv.org/abs/2607.19881) at the **OSCAR 2025** Workshop at Waseda University, Tokyo.",
+    text: "I presented [Revisiting Hardware Priority Queue Architectures](https://arxiv.org/abs/2607.19881) at the **OSCAR 2025** Workshop at Waseda University in Tokyo.",
   },
 
   // ---------------- 2024 ----------------
   {
     date: "2024-05",
     tag: "Milestone",
-    text: "I receive my M.S. in Electrical Engineering from **NYU Tandon School of Engineering**.",
+    text: "I earned my M.S. in Electrical Engineering from **NYU Tandon School of Engineering**.",
   },
 
   // ---------------- 2022 ----------------
   {
     date: "2022-08",
     tag: "Milestone",
-    text: "I start my M.S. in Electrical Engineering at **New York University**, Tandon School of Engineering.",
+    text: "I began my M.S. in Electrical Engineering at **New York University Tandon School of Engineering**.",
   },
 
   // ---------------- 2021 ----------------
@@ -71,23 +71,23 @@ window.NEWS = [
   {
     date: "2020-06",
     tag: "Milestone",
-    text: "I am certified as an **Engineer in Training (E.I.T.)** by the Oregon State Board of Examiners for Engineering.",
+    text: "I earned my **Engineer in Training (E.I.T.)** certification from the Oregon State Board of Examiners for Engineering.",
   },
   {
     date: "2020-05",
     tag: "Milestone",
-    text: "I graduate from the **University of Portland** with a dual B.S. in Computer Science and Mechanical Engineering.",
+    text: "I graduated from the **University of Portland** with B.S. degrees in Computer Science and Mechanical Engineering.",
   },
   {
     date: "2020-05",
     tag: "Award",
-    text: "I receive the **Undergraduate Team Experience Award** (2019–2020) from the Oregon NASA Space Grant Consortium.",
+    text: "I received the **Undergraduate Team Experience Award** (2019–2020) from the Oregon NASA Space Grant Consortium.",
   },
 
   // ---------------- 2019 ----------------
   {
     date: "2019-11",
     tag: "Talk",
-    text: "I present the NASA Lunabotics 2020 poster at the **2019 Oregon NASA Space Grant Consortium** at Oregon State University.",
+    text: "I presented our NASA Lunabotics 2020 poster at the **2019 Oregon NASA Space Grant Consortium** at Oregon State University.",
   },
 ];

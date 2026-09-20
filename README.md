@@ -13,7 +13,7 @@ Personal academic website of Qihang (Charlie) Wu, Ph.D. student in Computer Engi
 | Update the CV page | `data/cv.js` | Six arrays: `education`, `research`, `industry`, `projects`, `presentations`, `honors`. Also replace `assets/Curriculum_Vitae.pdf` so the Download button stays current. |
 | Edit research areas | `data/research.js` | Each area has a short blurb (home page), long blurb (research page), keywords, and representative publication ids. Area ids double as publication tags; labels and colors live in the `AREAS` map in `js/render.js`. |
 | Change name / title / email / links | `data/site.js` | One place; nav, footer, and banners update everywhere. Page `<title>` tags in each HTML file and the hero bio in `index.html` must be updated by hand. |
-| Portrait | `assets/qihang_wu.jpg` | Not in the repo yet: add a square photo at this path (the home page hides the portrait if the file is missing). |
+| Portrait | `assets/qihang_wu.jpg` | Replace the existing square image; the home page hides the portrait block if the file is missing. |
 
 ## Preview locally
 
@@ -34,10 +34,11 @@ One-time setup:
 
 After that, publishing an update is just: commit → push.
 
-**Cache busting:** every page loads `css/site.css`, `js/render.js`, and `data/*.js` with a `?v=YYYYMMDD` token. After changing any CSS/JS/data file, bump the token in all five HTML files so visitors do not get stale cached versions:
+**Cache busting:** every page loads `css/site.css`, `js/render.js`, and `data/*.js` with a shared version token. After changing any CSS/JS/data file, replace the old token in all five HTML files so visitors do not get stale cached versions:
 
 ```bash
-LANG=C sed -i 's/?v=[0-9]\{8\}/?v=NEW_DATE_HERE/g' *.html
+OLD_TOKEN=20260919h NEW_TOKEN=20261001
+LANG=C sed -i "s/?v=${OLD_TOKEN}/?v=${NEW_TOKEN}/g" *.html
 ```
 
 If you later buy a custom domain, add it in Settings → Pages and create a `CNAME` file; also update the URL in `sitemap.xml`.

@@ -5,45 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Qihang (Charlie) Wu</title>
   <meta name="description" content="Qihang (Charlie) Wu is a Ph.D. student in Computer Engineering at Arizona State University working on LLM agents for chip design, computer architecture, and heterogeneous integration.">
+  <meta name="theme-color" content="#7f1734">
   <meta property="og:title" content="Qihang (Charlie) Wu">
-  <meta property="og:description" content="LLM agents for chip design, computer architecture, and heterogeneous integration.">
+  <meta property="og:description" content="AI agents for electronic design automation, computer architecture, and heterogeneous integration.">
   <meta property="og:type" content="website">
+  <link rel="canonical" href="https://charliewu.me/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=20260919f">
+  <link rel="stylesheet" href="css/site.css?v=20260919h">
 </head>
 <body data-page="home">
 
-  <main>
+  <main id="content">
     <section class="hero">
       <div class="wrap">
         <div class="hero-grid">
-          <div>
-        <h1>Qihang (<em>Charlie</em>) Wu</h1>
-        <p class="lede">
-          I am a Ph.D. student in Computer Engineering at Arizona State University, advised by
-          Prof. Vidya A. Chhabria, and I work closely with Prof. Aman Arora on computer architecture.
-          My research is in electronic design automation: I build LLM-guided agents that optimize EDA
-          algorithms and explore architectures for heterogeneous (2.5D/3D) integration, with broader
-          interests in computer architecture and SRAM and circuit design.
-          I hold an M.S. in Electrical Engineering from NYU Tandon School of Engineering and dual B.S.
-          degrees in Computer Science and Mechanical Engineering from the University of Portland.
-          Before graduate school, I was a hardware system engineer at Artly AI, a robotics startup in Seattle.
-        </p>
-        <p class="hero-meta">Ph.D. Student · Computer Engineering · Arizona State University</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="publications.html">Publications</a>
-          <a class="btn btn-ghost" href="assets/Curriculum_Vitae.pdf">Download CV</a>
-        </div>
+          <div class="hero-copy">
+            <p class="hero-kicker">Computer Engineering · Arizona State University</p>
+            <h1>Qihang <em>(Charlie)</em> Wu</h1>
+            <p class="hero-statement">I build AI agents that help design better chips.</p>
+            <p class="lede">
+              I am a Ph.D. student advised by Prof. Vidya A. Chhabria, and I collaborate with
+              Prof. Aman Arora on computer architecture. My research develops LLM-based agents for
+              electronic design automation, with a focus on physical design, FPGA algorithms, and
+              2.5D/3D chiplet systems.
+            </p>
+            <p class="hero-background">
+              Previously, I was a hardware systems engineer at Artly AI. I earned my M.S. in Electrical
+              Engineering from NYU and dual B.S. degrees in Computer Science and Mechanical Engineering
+              from the University of Portland.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="research.html">Explore my research</a>
+              <a class="btn btn-ghost" href="publications.html">View publications</a>
+            </div>
+            <nav class="hero-links" aria-label="Profile links">
+              <a href="mailto:qihangwu@asu.edu">Email</a>
+              <a href="https://scholar.google.com/citations?user=aVm2VG4AAAAJ&amp;hl=en">Google Scholar</a>
+              <a href="https://github.com/hahacharlie">GitHub</a>
+              <a href="assets/Curriculum_Vitae.pdf">CV</a>
+            </nav>
           </div>
-          <img class="hero-portrait" src="assets/qihang_wu.jpg" alt="Qihang (Charlie) Wu" onerror="this.remove()">
-        </div>
-        <div class="recruit-banner">
-          <strong>Currently</strong>
-          <span>I am a Ph.D. student at Arizona State University working on LLM agents for chip design, and I am open to research collaborations.</span>
-          <a class="recruit-link" href="mailto:qihangwu@asu.edu">Get in touch →</a>
+          <aside class="hero-visual" aria-label="Profile">
+            <div class="portrait-frame">
+              <img class="hero-portrait" src="assets/qihang_wu.jpg" alt="Portrait of Qihang (Charlie) Wu" onerror="this.closest('.hero-visual').remove()">
+            </div>
+            <div class="hero-note">
+              <span class="status-dot" aria-hidden="true"></span>
+              <p><strong>Open to research collaborations</strong><br>Agentic EDA, architecture, and chiplets.</p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -52,10 +65,10 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Research</div>
-            <h2>What I work on</h2>
+            <div class="eyebrow">Research directions</div>
+            <h2>Across the hardware stack</h2>
           </div>
-          <a class="more" href="research.html">All research areas →</a>
+          <a class="more" href="research.html">All research areas</a>
         </div>
         <div class="pillars" id="pillars"></div>
       </div>
@@ -65,10 +78,10 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Publications</div>
-            <h2>Selected publications</h2>
+            <div class="eyebrow">Selected work</div>
+            <h2>Recent publications</h2>
           </div>
-          <a class="more" href="publications.html">All publications →</a>
+          <a class="more" href="publications.html">All publications</a>
         </div>
         <div id="home-selected-pubs"></div>
       </div>
@@ -81,17 +94,17 @@
             <div class="eyebrow">News</div>
             <h2>Recent updates</h2>
           </div>
-          <a class="more" href="news.html">All news →</a>
+          <a class="more" href="news.html">All news</a>
         </div>
         <div id="home-news"></div>
       </div>
     </section>
   </main>
 
-  <script src="data/site.js?v=20260919f"></script>
-  <script src="data/research.js?v=20260919f"></script>
-  <script src="data/news.js?v=20260919f"></script>
-  <script src="data/publications.js?v=20260919f"></script>
-  <script src="js/render.js?v=20260919f"></script>
+  <script src="data/site.js?v=20260919h"></script>
+  <script src="data/research.js?v=20260919h"></script>
+  <script src="data/news.js?v=20260919h"></script>
+  <script src="data/publications.js?v=20260919h"></script>
+  <script src="js/render.js?v=20260919h"></script>
 </body>
 </html>

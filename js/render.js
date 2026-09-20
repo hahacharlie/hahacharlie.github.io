@@ -14,11 +14,11 @@
   const esc = (s) =>
     String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  // [text](url) → <a>, **text** → <b>
+  // [text](url) → <a>, **text** → <strong>
   const mdLinks = (s) =>
     esc(s)
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-      .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
 
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const fmtDate = (ym) => {
@@ -53,27 +53,52 @@
     nav.innerHTML = `
       <div class="nav-inner">
         <a class="brand" href="index.html">
-          <span><span class="brand-mark">${esc(S.firstName)}</span> Wu</span>
-          <span class="brand-sub">${esc(S.institution)}</span>
+          <span class="brand-mark" aria-hidden="true">QW</span>
+          <span class="brand-copy">
+            <span class="brand-name">${esc(S.shortName)}</span>
+            <span class="brand-sub">${esc(S.institution)}</span>
+          </span>
         </a>
-        <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
+        <nav id="primary-navigation" aria-label="Primary navigation">
         <ul class="nav-links">
           ${items
             .map(
               ([href, key, label]) =>
-                `<li><a href="${href}" class="${key === page ? "active" : ""}">${label}</a></li>`
+                `<li><a href="${href}" class="${key === page ? "active" : ""}"${key === page ? ' aria-current="page"' : ""}>${label}</a></li>`
             )
             .join("")}
         </ul>
+        </nav>
       </div>`;
     document.body.prepend(nav);
+    const skip = document.createElement("a");
+    skip.className = "skip-link";
+    skip.href = "#content";
+    skip.textContent = "Skip to main content";
+    document.body.prepend(skip);
     const toggle = nav.querySelector(".nav-toggle");
     const links = nav.querySelector(".nav-links");
+    const closeMenu = () => {
+      links.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation");
+    };
     toggle.addEventListener("click", () => {
       const open = links.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open);
+      toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    });
+    links.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && links.classList.contains("open")) {
+        closeMenu();
+        toggle.focus();
+      }
     });
   }
 
@@ -82,21 +107,22 @@
     f.className = "footer";
     f.innerHTML = `
       <div class="footer-inner">
-        <div>
+        <div class="footer-intro">
+          <div class="eyebrow">Qihang (Charlie) Wu</div>
           <h4>${esc(S.name)}</h4>
-          <p>${esc(S.title)}<br>${esc(S.institution)}<br>${esc(S.location)}</p>
+          <p>${esc(S.tagline)}</p>
         </div>
-        <div>
-          <h4>Contact</h4>
-          <p><a href="mailto:${esc(S.email)}">${esc(S.email)}</a></p>
+        <div class="footer-contact">
+          <p>${esc(S.title)}<br>${esc(S.institution)} · ${esc(S.location)}</p>
           <div class="footer-links">
+            <a href="mailto:${esc(S.email)}">Email</a>
             <a href="${esc(S.links.scholar)}">Google Scholar</a>
             <a href="${esc(S.links.github)}">GitHub</a>
             <a href="${esc(S.links.linkedin)}">LinkedIn</a>
             <a href="${esc(S.links.cv)}">CV</a>
           </div>
-          <p class="footer-note">© ${new Date().getFullYear()} ${esc(S.name)}</p>
         </div>
+        <p class="footer-note">© ${new Date().getFullYear()} ${esc(S.name)}</p>
       </div>`;
     document.body.appendChild(f);
   }
@@ -105,11 +131,11 @@
 
   function newsItemHTML(n) {
     return `
-      <div class="news-item">
-        <span class="news-date">${fmtDate(n.date)}</span>
+      <article class="news-item">
+        <time class="news-date" datetime="${esc(n.date)}">${fmtDate(n.date)}</time>
         <span class="news-tag" data-tag="${esc(n.tag)}">${esc(n.tag)}</span>
         <span class="news-text">${mdLinks(n.text)}</span>
-      </div>`;
+      </article>`;
   }
 
   function renderNews(el, limit) {
@@ -130,7 +156,7 @@
       listEl.innerHTML = years
         .map(
           (y) =>
-            `<div class="pub-year">${y}</div>` +
+            `<h2 class="pub-year">${y}</h2>` +
             `<div class="news-list">${byYear[y].map(newsItemHTML).join("")}</div>`
         )
         .join("");
@@ -139,14 +165,18 @@
     }
 
     controlsEl.innerHTML =
-      TAGS.map(
-        (t) => `<button class="pub-filter ${t === "All" ? "active" : ""}" data-tag="${t}">${t}</button>`
-      ).join("") + `<span class="pub-count"></span>`;
+      `<div class="filter-group" role="group" aria-label="Filter news by type">` + TAGS.map(
+        (t) => `<button class="pub-filter ${t === "All" ? "active" : ""}" data-tag="${t}" aria-pressed="${t === "All"}">${t}</button>`
+      ).join("") + `</div><span class="pub-count" aria-live="polite"></span>`;
 
     controlsEl.querySelectorAll(".pub-filter").forEach((btn) =>
       btn.addEventListener("click", () => {
         tag = btn.dataset.tag;
-        controlsEl.querySelectorAll(".pub-filter").forEach((b) => b.classList.toggle("active", b === btn));
+        controlsEl.querySelectorAll(".pub-filter").forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-pressed", active);
+        });
         draw();
       })
     );
@@ -168,8 +198,8 @@
       .map(([k, v]) => `<a href="${esc(v)}">${esc(k)}</a>`)
       .join("");
     return `
-      <div class="pub-item${p.type === "preprint" ? " is-preprint" : ""}">
-        <div class="pub-title">${title}</div>
+      <article class="pub-item${p.type === "preprint" ? " is-preprint" : ""}">
+        <h3 class="pub-title">${title}</h3>
         <div class="pub-authors">${bold ? boldAuthors(p.authors) : esc(p.authors)}</div>
         <div class="pub-meta">
           <span class="venue-badge" title="${esc(p.venueFull || "")}">${esc(p.venue)} ${p.year}</span>
@@ -178,7 +208,7 @@
           ${links ? `<span class="pub-links">${links}</span>` : ""}
         </div>
         ${opts && opts.tags ? areaChipsHTML(p) : ""}
-      </div>`;
+      </article>`;
   }
 
   // Research areas: filter label, chip label, and accent color.
@@ -186,9 +216,9 @@
   // data/research.js.
   const AREAS = {
     eda: { label: "Agentic AI for EDA", chip: "Agentic AI for EDA", color: "#8c1d40" },
-    hi: { label: "Heterogeneous Integration", chip: "Heterogeneous Integration", color: "#ff7f32" },
-    architecture: { label: "Computer Architecture", chip: "Architecture", color: "#00a3e0" },
-    circuits: { label: "Circuits & Memory", chip: "Circuits & Memory", color: "#5c9a1b" },
+    hi: { label: "Heterogeneous Integration", chip: "Heterogeneous Integration", color: "#ad4b19" },
+    architecture: { label: "Computer Architecture", chip: "Architecture", color: "#087b9d" },
+    circuits: { label: "Circuits & Memory", chip: "Circuits & Memory", color: "#4e7c22" },
   };
 
   const areaChipsHTML = (p) => {
@@ -256,7 +286,7 @@
         ? years
             .map(
               (y) =>
-                `<div class="pub-year">${y}<span class="pub-year-count">${byYear[y].length} paper${byYear[y].length === 1 ? "" : "s"}</span></div>` +
+                `<h2 class="pub-year">${y}<span class="pub-year-count">${byYear[y].length} paper${byYear[y].length === 1 ? "" : "s"}</span></h2>` +
                 byYear[y].map((p) => pubItemHTML(p, { tags: true })).join("")
             )
             .join("")
@@ -267,19 +297,21 @@
 
     function setArea(next) {
       area = next;
-      controlsEl.querySelectorAll(".pub-filter").forEach((b) =>
-        b.classList.toggle("active", b.dataset.area === area)
-      );
+      controlsEl.querySelectorAll(".pub-filter").forEach((b) => {
+        const active = b.dataset.area === area;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-pressed", active);
+      });
       draw();
       syncUrl();
     }
 
     controlsEl.innerHTML =
-      FILTERS.map(
+      `<div class="filter-group" role="group" aria-label="Filter publications by research area">` + FILTERS.map(
         ([k, label]) =>
-          `<button class="pub-filter ${k === area ? "active" : ""}" data-area="${k}">${label}<span class="pub-filter-count">${counts[k]}</span></button>`
-      ).join("") +
-      `<input class="pub-search" type="search" placeholder="Search title, author, venue…" aria-label="Search publications" value="${esc(query)}">` +
+          `<button class="pub-filter ${k === area ? "active" : ""}" data-area="${k}" aria-pressed="${k === area}">${label}<span class="pub-filter-count">${counts[k]}</span></button>`
+      ).join("") + `</div>` +
+      `<input class="pub-search" type="search" placeholder="Search title, author, or venue" aria-label="Search publications" autocomplete="off" value="${esc(query)}">` +
       `<span class="pub-count" aria-live="polite"></span>`;
 
     controlsEl.querySelectorAll(".pub-filter").forEach((btn) =>
@@ -320,6 +352,7 @@
         <div class="pillar-num">0${i + 1}</div>
         <h3>${esc(r.title)}</h3>
         <p>${esc(r.short)}</p>
+        <span class="pillar-link">View research area</span>
       </a>`;
     }).join("");
   }
@@ -341,17 +374,21 @@
       const style = a ? ` style="--area-color:${a.color}"` : "";
       // Areas without publications (yet) get no rep list and no "All …" link.
       const moreLink = a && reps
-        ? `<a class="research-more" href="publications.html?area=${esc(r.id)}">All ${esc(a.label)} publications →</a>`
+        ? `<a class="research-more" href="publications.html?area=${esc(r.id)}">All ${esc(a.label)} publications</a>`
         : "";
       return `
-      <div class="research-block" id="${esc(r.id)}"${style}>
-        <h2>${esc(r.title)}</h2>
-        ${r.subtitle ? `<div class="research-sub">${esc(r.subtitle)}</div>` : ""}
-        <p class="research-long">${esc(r.long)}</p>
-        <div class="keywords">${r.keywords.map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div>
-        ${reps ? `<div class="rep-pubs">${reps}</div>` : ""}
-        ${moreLink}
-      </div>`;
+      <section class="research-block" id="${esc(r.id)}"${style}>
+        <div class="research-heading">
+          ${r.subtitle ? `<div class="research-sub">${esc(r.subtitle)}</div>` : ""}
+          <h2>${esc(r.title)}</h2>
+        </div>
+        <div class="research-content">
+          <p class="research-long">${esc(r.long)}</p>
+          <div class="keywords" aria-label="Research keywords">${r.keywords.map((k) => `<span class="keyword">${esc(k)}</span>`).join("")}</div>
+          ${reps ? `<div class="rep-pubs"><div class="rep-label">Representative work</div>${reps}</div>` : ""}
+          ${moreLink}
+        </div>
+      </section>`;
     }).join("");
   }
 
