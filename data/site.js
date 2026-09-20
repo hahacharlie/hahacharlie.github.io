@@ -7,7 +7,7 @@ window.SITE = {
   name: "Qihang (Charlie) Wu",
   shortName: "Charlie Wu",
   firstName: "Charlie",
-  title: "M.S. Student in Electrical Engineering",
+  title: "Ph.D. Student in Computer Engineering",
   institution: "Arizona State University",
   school: "Ira A. Fulton Schools of Engineering",
   location: "Tempe, Arizona",

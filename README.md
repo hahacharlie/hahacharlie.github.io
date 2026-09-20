@@ -1,6 +1,6 @@
 # Qihang (Charlie) Wu — personal site
 
-Personal academic website of Qihang (Charlie) Wu, M.S. student in Electrical Engineering at Arizona State University.
+Personal academic website of Qihang (Charlie) Wu, Ph.D. student in Computer Engineering at Arizona State University.
 
 **Zero build tools.** Pure HTML/CSS/JS: every page works by opening the `.html` file directly or serving the folder statically. All content lives in `data/*.js`; to update the site you almost never touch HTML.
 
