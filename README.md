@@ -29,7 +29,7 @@ One-time setup:
 
 1. Create a repository named `hahacharlie.github.io` under the `hahacharlie` GitHub account (custom domain `charliewu.me` via the `CNAME` file).
 2. Push this folder to that repository (`main` branch).
-3. In the repo: Settings → Pages → Source: “Deploy from a branch”, branch `main`, folder `/ (root)`.
+3. In the repo: Settings → Pages → Source: “GitHub Actions”.
 4. The site appears at `https://charliewu.me/` within a minute or two.
 
 After that, publishing an update is just: commit → push.
