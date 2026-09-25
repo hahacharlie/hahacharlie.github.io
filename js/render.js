@@ -109,7 +109,7 @@
         <div class="footer-intro">
           <div class="eyebrow">Qihang (Charlie) Wu</div>
           <h4>${esc(S.name)}</h4>
-          <p>${esc(S.tagline)}</p>
+          <!-- <p>${esc(S.tagline)}</p> -->
         </div>
         <div class="footer-contact">
           <p>${esc(S.title)}<br>${esc(S.institution)} · ${esc(S.location)}</p>
