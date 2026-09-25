@@ -107,7 +107,7 @@
     f.innerHTML = `
       <div class="footer-inner">
         <div class="footer-intro">
-          <div class="eyebrow">Qihang (Charlie) Wu</div>
+          <!-- <div class="eyebrow">Qihang (Charlie) Wu</div> -->
           <h4>${esc(S.name)}</h4>
           <!-- <p>${esc(S.tagline)}</p> -->
         </div>
