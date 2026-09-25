@@ -43,7 +43,6 @@
     const page = document.body.dataset.page || "";
     const items = [
       ["index.html", "home", "Home"],
-      ["research.html", "research", "Research"],
       ["publications.html", "publications", "Publications"],
       ["news.html", "news", "News"],
       ["cv.html", "cv", "CV"],
@@ -160,10 +159,12 @@
             `<div class="news-list">${byYear[y].map(newsItemHTML).join("")}</div>`
         )
         .join("");
-      controlsEl.querySelector(".pub-count").textContent =
+      if (controlsEl) controlsEl.querySelector(".pub-count").textContent =
         `${items.length} item${items.length === 1 ? "" : "s"}`;
     }
 
+    // ponytail: controls div is commented out in news.html; uncomment it to restore filters.
+    if (controlsEl) {
     controlsEl.innerHTML =
       `<div class="filter-group" role="group" aria-label="Filter news by type">` + TAGS.map(
         (t) => `<button class="pub-filter ${t === "All" ? "active" : ""}" data-tag="${t}" aria-pressed="${t === "All"}">${t}</button>`
@@ -180,6 +181,7 @@
         draw();
       })
     );
+    }
     draw();
   }
 
@@ -291,13 +293,13 @@
             )
             .join("")
         : `<p class="pub-empty">No publications match. Try a different search or filter.</p>`;
-      controlsEl.querySelector(".pub-count").textContent =
+      if (controlsEl) controlsEl.querySelector(".pub-count").textContent =
         `${pubs.length} publication${pubs.length === 1 ? "" : "s"}`;
     }
 
     function setArea(next) {
       area = next;
-      controlsEl.querySelectorAll(".pub-filter").forEach((b) => {
+      if (controlsEl) controlsEl.querySelectorAll(".pub-filter").forEach((b) => {
         const active = b.dataset.area === area;
         b.classList.toggle("active", active);
         b.setAttribute("aria-pressed", active);
@@ -306,6 +308,8 @@
       syncUrl();
     }
 
+    // ponytail: controls div is commented out in publications.html; uncomment it to restore filters.
+    if (controlsEl) {
     controlsEl.innerHTML =
       `<div class="filter-group" role="group" aria-label="Filter publications by research area">` + FILTERS.map(
         ([k, label]) =>
@@ -322,6 +326,7 @@
       draw();
       syncUrl();
     });
+    }
 
     // Area chips inside the list filter in place instead of reloading.
     listEl.addEventListener("click", (e) => {
@@ -337,7 +342,7 @@
   // Home page: every publication flagged `selected: true`.
   function renderSelectedPubs(el) {
     el.innerHTML = window.PUBLICATIONS.filter((p) => p.selected)
-      .map((p) => pubItemHTML(p, { tags: true }))
+      .map((p) => pubItemHTML(p))
       .join("");
   }
 
@@ -485,7 +490,6 @@
     const page = document.body.dataset.page;
 
     if (page === "home") {
-      renderPillars(document.getElementById("pillars"));
       renderSelectedPubs(document.getElementById("home-selected-pubs"));
       renderNews(document.getElementById("home-news"), 6);
     }

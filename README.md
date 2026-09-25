@@ -46,8 +46,8 @@ If you later buy a custom domain, add it in Settings → Pages and create a `CNA
 ## Structure
 
 ```
-index.html …… home (hero + bio, research areas, selected publications, recent news)
-research.html … four research areas + representative papers
+index.html …… home (hero + bio, selected publications, recent news)
+research.html … four research areas + representative papers (unlinked from nav/home; still served)
 publications.html … full list, filterable by area, grouped by year
                     (filters sync to the URL: ?area=eda&q=agent is shareable)
 news.html …… full news archive

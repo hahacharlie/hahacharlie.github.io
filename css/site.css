@@ -20,9 +20,9 @@
   --gold-bg: #fff0b3;
   --shadow-sm: 0 8px 24px rgba(36, 29, 25, 0.06);
   --shadow-md: 0 22px 54px rgba(36, 29, 25, 0.10);
-  --serif: "Newsreader", "Source Serif 4", Georgia, "Times New Roman", serif;
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Consolas, monospace;
+  --serif: var(--sans);
+  --sans: "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "Ubuntu Mono", "SF Mono", SFMono-Regular, ui-monospace, Menlo, Consolas, monospace;
   --max: 1120px;
   --measure: 760px;
   --pad: clamp(20px, 4vw, 40px);
@@ -260,8 +260,10 @@ h1.page-title {
   font-size: 17px;
   line-height: 1.78;
   color: var(--ink-soft);
+  text-wrap: pretty;
 }
 .hero-background {
+  text-wrap: pretty;
   max-width: 700px;
   margin-top: 18px;
   padding-left: 18px;
@@ -382,7 +384,7 @@ h1.page-title {
 .pillar-num {
   margin-bottom: 24px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: 0.12em;
   color: var(--area-color, var(--accent));
 }
@@ -468,7 +470,7 @@ h1.page-title {
 .rep-venue {
   margin-left: 7px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12px;
   white-space: nowrap;
   color: var(--ink-faint);
 }
@@ -487,7 +489,7 @@ h1.page-title {
 .news-item:first-child { border-top: 1px solid var(--line); }
 .news-date {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: 0.02em;
   white-space: nowrap;
   color: var(--ink-faint);
@@ -610,7 +612,7 @@ h1.page-title {
   border: 1px solid #e4cbd4;
   border-radius: 3px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 650;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -644,28 +646,16 @@ h1.page-title {
   text-decoration: none;
 }
 .area-chip:hover { color: var(--chip, var(--accent-deep)); background: color-mix(in srgb, var(--chip, var(--accent)) 13%, white); }
-#home-selected-pubs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
 #home-selected-pubs .pub-item {
   margin: 0;
-  padding: 24px;
-  border-left-width: 1px;
-  border-radius: 6px;
+  padding: 16px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
 }
-#home-selected-pubs .pub-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  border-radius: 6px 0 0 6px;
-  background: var(--accent);
-}
-#home-selected-pubs .pub-item.is-preprint::before { background: var(--line-strong); }
+#home-selected-pubs .pub-item:first-child { padding-top: 0; }
+#home-selected-pubs .pub-item:last-child { border-bottom: 0; padding-bottom: 0; }
 
 /* ---------------- CV ---------------- */
 .join-section { padding: 42px 0 7px; }
@@ -681,7 +671,7 @@ h1.page-title {
 .cv-entry:last-child { border-bottom: 0; }
 .cv-entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 22px; }
 .cv-entry-title { font-size: 15px; font-weight: 650; color: var(--ink); }
-.cv-entry-dates { flex: 0 0 auto; font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); }
+.cv-entry-dates { flex: 0 0 auto; font-family: var(--mono); font-size: 12px; color: var(--ink-faint); }
 .cv-entry-sub { font-size: 13px; font-weight: 600; color: var(--ink-soft); }
 .cv-entry-meta { font-size: 12px; color: var(--ink-faint); }
 .cv-entry-blurb { margin-top: 8px; font-size: 13.5px; color: var(--ink-soft); }
@@ -711,7 +701,7 @@ h1.page-title {
 .mentee-table th:last-child, .mentee-table td:last-child { padding-right: 0; }
 .mentee-table tr:last-child td { border-bottom: 0; }
 .mentee-name { font-weight: 600; color: var(--ink); }
-.mentee-years { font-family: var(--mono); font-size: 10px; white-space: nowrap; color: var(--ink-faint); }
+.mentee-years { font-family: var(--mono); font-size: 11.5px; white-space: nowrap; color: var(--ink-faint); }
 
 /* ---------------- footer ---------------- */
 .footer {
@@ -785,7 +775,7 @@ h1.page-title {
   .hero-visual { width: min(100%, 310px); margin-top: 10px; }
   .hero h1 { font-size: clamp(47px, 14vw, 62px); white-space: normal; }
   .hero-statement { font-size: clamp(26px, 8vw, 33px); }
-  .pillars, #home-selected-pubs { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
   .pillar { min-height: 0; }
   .section-head { align-items: flex-start; }
   .section-head .more { margin-top: 5px; }
@@ -813,7 +803,6 @@ h1.page-title {
   .pillar { padding: 27px 24px 23px; }
   .research-block { scroll-margin-top: 78px; }
   .pub-item { padding: 18px 17px 17px 19px; }
-  #home-selected-pubs .pub-item { padding: 21px; }
   .pub-title { font-size: 18px; }
   .news-item { grid-template-columns: 70px minmax(0, 1fr); gap: 10px; }
 }
